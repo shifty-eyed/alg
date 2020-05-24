@@ -32,12 +32,13 @@ function ks(capacity) {
 function traceItems(table, capacity) {
 	const result = []
 	let c = capacity
-	for (let r = items.length; r >= 0; r--) {
+	for (let r = items.length; r > 0; r--) {
 		const curVal = table[r][c]
-		const prevVal = table[r - 1][c]
+		const upVal = table[r - 1][c]
 		const itemSpace = items[r - 1].space
-		if (curVal != prevVal) {
-
+		if (curVal != upVal) {
+			result.push(r - 1)
+			c -= itemSpace
 		}
 	}
 	return result
@@ -55,9 +56,9 @@ function createTable(rows, cols) {
 	return table;
 }
 
-for (let i = 0; i < 15; i++) {
+for (let i = 0; i < 20; i++) {
 	const a = ks(i)
-	console.log(`capacity ${i} val: `+a);
+	console.log(`capacity ${i} val: ${a.val} items (${a.included})`);
 }
 
 let a = {
